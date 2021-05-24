@@ -9,7 +9,7 @@ Sphere::Sphere(glm::vec3 pos, int r, int res)
 	nbSectors = res;
 	nbStacks = res / 2;
 	vertices = std::vector<float>();
-	indices = std::vector<float>();
+	indices = std::vector<unsigned int>();
 
 	computeVertices();
 }
@@ -47,7 +47,7 @@ void Sphere::computeVertices()
 		k1 = i * (nbSectors + 1);
 		k2 = k1 + nbSectors + 1;
 
-		for (int j = 0; j < nbSectors; ++j)
+		for (int j = 0; j < nbSectors; ++j, ++k1, ++k2)
 		{
 			if (i != 0)
 			{
@@ -56,7 +56,7 @@ void Sphere::computeVertices()
 				indices.push_back(k1 + 1);
 			}
 
-			if (i != (nbStacks + 1))
+			if (i != (nbStacks - 1))
 			{
 				indices.push_back(k1 + 1);
 				indices.push_back(k2);
@@ -64,4 +64,14 @@ void Sphere::computeVertices()
 			}
 		}
 	}
+}
+
+std::vector<float> Sphere::getVertices()
+{
+	return vertices;
+}
+
+std::vector<unsigned int> Sphere::getIndices()
+{
+	return indices;
 }

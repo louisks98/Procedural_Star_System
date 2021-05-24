@@ -9,6 +9,9 @@ public:
 
 	void draw();
 
+	std::vector<float> getVertices();
+	std::vector<unsigned int> getIndices();
+
 private:
 
 	void computeVertices();
@@ -18,5 +21,5 @@ private:
 	int nbSectors;
 	int nbStacks;
 	std::vector<float> vertices;
-	std::vector<float> indices;
+	std::vector<unsigned int> indices;
 };
